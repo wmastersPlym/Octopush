@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Floor
+    uniqueID: 2845428227
+    locked: 0
+  - name: puck
+    uniqueID: 3832761247
+    locked: 0
+  - name: On floor
+    uniqueID: 990996187
+    locked: 0
