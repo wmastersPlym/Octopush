@@ -16,7 +16,7 @@ public class HandToMouse : MonoBehaviour
     void Update()
     {
         Vector2 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        print(targetPos);
+        //print(targetPos);
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = targetPos - pos;
         //transform.position = Vector2.MoveTowards(pos, targetPos, force * Time.deltaTime);
