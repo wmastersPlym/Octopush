@@ -19,11 +19,13 @@ public class PlayerController : MonoBehaviour
     public float turnSpeed;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -60,7 +62,12 @@ public class PlayerController : MonoBehaviour
         if(xMove != 0 || yMove != 0)
         {
             rb.MovePosition(new Vector2(transform.position.x + xMove, transform.position.y + yMove));
+            animator.SetBool("isSwimming", true);
+        } else
+        {
+            animator.SetBool("isSwimming", false);
         }
+
 
 
 
