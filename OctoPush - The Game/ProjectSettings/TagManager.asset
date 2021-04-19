@@ -38,15 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Floor
     uniqueID: 2845428227
+    locked: 0
+  - name: On floor
+    uniqueID: 990996187
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: puck
     uniqueID: 3832761247
     locked: 0
-  - name: On floor
-    uniqueID: 990996187
+  - name: People
+    uniqueID: 2026681039
+    locked: 0
+  - name: Forground
+    uniqueID: 3785757339
     locked: 0
