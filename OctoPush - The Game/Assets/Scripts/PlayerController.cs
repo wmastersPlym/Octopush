@@ -49,9 +49,11 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetAxisRaw("Horizontal") > 0.1f || Input.GetAxisRaw("Horizontal") < -0.1f)
         {
-            //rb.velocity = new Vector2(currentSpeed* Input.GetAxis("Horizontal"), rb.velocity.y);
-            //transform.position += new Vector3(Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime, 0.0f, 0.0f);
-            xMove = Input.GetAxis("Horizontal") * currentSpeed * Time.deltaTime;
+            /*Quaternion currentRot = transform.rotation;
+            currentRot.z += Input.GetAxisRaw("Horizontal") * turnSpeed * Time.deltaTime;
+            transform.rotation = currentRot;*/
+
+            transform.Rotate(new Vector3(0, 0, turnSpeed * Input.GetAxisRaw("Horizontal") *-1f));
         }
 
         if (Input.GetAxisRaw("Vertical") > 0.1f || Input.GetAxisRaw("Vertical") < -0.1f)
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isSwimming", true);
         } else
         {
-            print(rb.velocity);
+            //print(rb.velocity);
             rb.velocity = rb.velocity * friction;
             animator.SetBool("isSwimming", false);
         }

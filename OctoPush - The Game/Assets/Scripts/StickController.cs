@@ -10,9 +10,13 @@ public class StickController : MonoBehaviour
     public GameObject stickFlipped;
     public GameObject stickSideways;
 
+    public GameObject playerBody;
+
     private SpriteRenderer[] stickRenderes;
     private PolygonCollider2D[] stickHitboxes;
     private float fade = 0.6f;
+
+    
 
 
     // Start is called before the first frame update
@@ -44,6 +48,8 @@ public class StickController : MonoBehaviour
         {
             makeSticksInactive();
         }
+
+        transform.rotation = playerBody.transform.rotation;
 
         /*// TEMPORARY //
         Vector3 mousePos;

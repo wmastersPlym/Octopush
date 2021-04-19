@@ -8,6 +8,8 @@ public class FollowMouse : MonoBehaviour
     private Vector3 mousePos;
     public float moveSpeed = 3.0f;
 
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -15,6 +17,7 @@ public class FollowMouse : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         //transform.position = Vector2.Lerp(transform.position, mousePos, moveSpeed);
         GetComponent<Rigidbody2D>().MovePosition(mousePos);
+        
         
     }
 }
