@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public float swimSpeed;
     public float sprintSpeed;
+    public float friction;
+
     //Vector3 currentSpeed = new Vector3(0f, 0f, 0f);
     
     private float currentSpeed;
@@ -59,12 +61,16 @@ public class PlayerController : MonoBehaviour
             yMove = Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
         }
 
-        if(xMove != 0 || yMove != 0)
+        if(yMove != 0)
         {
-            rb.MovePosition(new Vector2(transform.position.x + xMove, transform.position.y + yMove));
+            //rb.MovePosition(new Vector2(transform.position.x + xMove, transform.position.y + yMove));
+            rb.velocity = (transform.up * yMove);
+            //rb.AddRelativeForce(transform.up * yMove, ForceMode2D.Force);
             animator.SetBool("isSwimming", true);
         } else
         {
+            print(rb.velocity);
+            rb.velocity = rb.velocity * friction;
             animator.SetBool("isSwimming", false);
         }
 

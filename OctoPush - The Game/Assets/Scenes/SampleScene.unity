@@ -2433,7 +2433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1645982916
 Transform:
   m_ObjectHideFlags: 0
@@ -2871,8 +2871,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7d9c260c1d7314ca70240a7ab5673b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimSpeed: 40
-  sprintSpeed: 80
+  swimSpeed: 2000
+  sprintSpeed: 4000
+  friction: 0.5
   turnSpeed: 0
 --- !u!50 &1897489373
 Rigidbody2D:
@@ -2890,7 +2891,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6cd3f786efa4ae647b8107905b8868b3, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
