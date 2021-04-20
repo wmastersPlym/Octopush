@@ -14,6 +14,9 @@ public class BreathingScript : MonoBehaviour
     public Slider slider;
     public WaterController wc;
 
+    public GameObject sticks;
+    public GameObject dummyStick;
+
     private void Start()
     {
         slider.maxValue = maxOxygen;
@@ -27,11 +30,14 @@ public class BreathingScript : MonoBehaviour
         {
             slider.value += oxyDrain * Time.deltaTime;
             wc.surface();
+            setDummySticks();
+
         }
         else // Submerged
         {
             slider.value -= oxyDrain * Time.deltaTime;
             wc.submerge();
+            setRealSticks();
         }
     }
 
@@ -41,5 +47,17 @@ public class BreathingScript : MonoBehaviour
         {
             print("Drowned");
         }
+    }
+
+    private void setRealSticks()
+    {
+        dummyStick.SetActive(false);
+        sticks.SetActive(true);
+    }
+
+    private void setDummySticks()
+    {
+        sticks.SetActive(false);
+        dummyStick.SetActive(true);
     }
 }
