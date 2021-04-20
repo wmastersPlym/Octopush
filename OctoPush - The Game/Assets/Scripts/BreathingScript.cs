@@ -12,6 +12,7 @@ public class BreathingScript : MonoBehaviour
 
 
     public Slider slider;
+    public WaterController wc;
 
     private void Start()
     {
@@ -22,13 +23,15 @@ public class BreathingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) // Above water
         {
             slider.value += oxyDrain * Time.deltaTime;
+            wc.surface();
         }
-        else
+        else // Submerged
         {
             slider.value -= oxyDrain * Time.deltaTime;
+            wc.submerge();
         }
     }
 

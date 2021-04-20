@@ -49,7 +49,11 @@ public class StickController : MonoBehaviour
             makeSticksInactive();
         }
 
+
+        // Fix rotation of stick to the same as the player body
+
         transform.rotation = playerBody.transform.rotation;
+        transform.eulerAngles += new Vector3(0, 0, 180f);
 
         /*// TEMPORARY //
         Vector3 mousePos;
