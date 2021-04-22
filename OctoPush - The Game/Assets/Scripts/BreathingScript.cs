@@ -17,6 +17,8 @@ public class BreathingScript : MonoBehaviour
     public GameObject sticks;
     public GameObject dummyStick;
 
+    public bool controlsEnabled;
+
     private void Start()
     {
         slider.maxValue = maxOxygen;
@@ -26,20 +28,38 @@ public class BreathingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) // Above water
+        if(controlsEnabled)
         {
-            slider.value += oxyDrain * Time.deltaTime;
-            wc.surface();
-            setDummySticks();
+            if (Input.GetKey(KeyCode.Space)) // Above water
+            {
+                slider.value += oxyDrain * Time.deltaTime * 2f;
+                surface();
 
-        }
-        else // Submerged
+            }
+            else // Submerged
+            {
+                slider.value -= oxyDrain * Time.deltaTime;
+                submerge();
+            }
+        } else
         {
-            slider.value -= oxyDrain * Time.deltaTime;
-            wc.submerge();
-            setRealSticks();
+            surface();
         }
+        
     }
+
+    public void surface()
+    {
+        wc.surface();
+        setDummySticks();
+    }
+
+    public void submerge()
+    {
+        wc.submerge();
+        setRealSticks();
+    }
+
 
     public void checkIfDowned()
     {
@@ -59,5 +79,10 @@ public class BreathingScript : MonoBehaviour
     {
         sticks.SetActive(false);
         dummyStick.SetActive(true);
+    }
+
+    public void resetOxygen()
+    {
+        slider.value = maxOxygen;
     }
 }

@@ -10,13 +10,15 @@ public class PlayerController : MonoBehaviour
     public float sprintSpeed;
     public float friction;
 
+    public bool controlsEnabled;
+
     //Vector3 currentSpeed = new Vector3(0f, 0f, 0f);
     
     private float currentSpeed;
 
     //float targetSpeed;
 
-    float acceleration = 2.5f;
+    //float acceleration = 2.5f;
 
     public float turnSpeed;
 
@@ -33,51 +35,62 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool moved = false;
+        if(controlsEnabled)
+        {
+            calculateMovement();
+        }
 
+
+    }
+
+    private void calculateMovement()
+    {
         // Sprinting
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))  // If shift being held set current speed to sprint speed, else set it to normal speed
         {
             currentSpeed = sprintSpeed;
-        } else
+        }
+        else
         {
             currentSpeed = swimSpeed;
         }
 
+
+
         float xMove = 0.0f;
         float yMove = 0.0f;
 
-        if(Input.GetAxisRaw("Horizontal") > 0.1f || Input.GetAxisRaw("Horizontal") < -0.1f)
+        if (Input.GetAxisRaw("Horizontal") > 0.1f || Input.GetAxisRaw("Horizontal") < -0.1f) // Detects if A/D being held
         {
-            /*Quaternion currentRot = transform.rotation;
-            currentRot.z += Input.GetAxisRaw("Horizontal") * turnSpeed * Time.deltaTime;
-            transform.rotation = currentRot;*/
+            xMove = turnSpeed * Input.GetAxisRaw("Horizontal") * -1f; // Calculates variable for turning using direction and turning speed
 
-            transform.Rotate(new Vector3(0, 0, turnSpeed * Input.GetAxisRaw("Horizontal") *-1f));
         }
 
         if (Input.GetAxisRaw("Vertical") > 0.1f || Input.GetAxisRaw("Vertical") < -0.1f)
         {
-            //rb.velocity = new Vector2(rb.velocity.x, Input.GetAxis("Vertical") * currentSpeed);
-            //transform.position += new Vector3(0.0f, Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime, 0.0f);
-            yMove = Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime;
+            yMove = Input.GetAxis("Vertical") * currentSpeed * Time.deltaTime; // Calculates variable for moving forwards and backwards
+                                                                               // using the current speed
         }
 
-        if(yMove != 0)
+        if (yMove != 0) // if trying to move
         {
-            //rb.MovePosition(new Vector2(transform.position.x + xMove, transform.position.y + yMove));
-            rb.velocity = (transform.up * yMove);
-            //rb.AddRelativeForce(transform.up * yMove, ForceMode2D.Force);
+            rb.velocity = (transform.up * yMove); // set velocity using the movement variable
             animator.SetBool("isSwimming", true);
-        } else
+        }
+        else
         {
-            //print(rb.velocity);
-            rb.velocity = rb.velocity * friction;
+            rb.velocity = rb.velocity * friction; // else quickly reduce velocity down to 0
             animator.SetBool("isSwimming", false);
         }
 
-
-
-
+        if (xMove != 0.0f)
+        {
+            rb.angularVelocity = xMove; // sets turning velocity using the turning variable
+            animator.SetBool("isSwimming", true);
+        }
+        else
+        {
+            rb.angularVelocity = rb.angularVelocity * friction; // else quickly reduce turning velocity down to 0
+        }
     }
 }
