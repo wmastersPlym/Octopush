@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BreathingScript : MonoBehaviour
 {
+
+    public UnityEvent drownedEvent;
 
     public float maxOxygen = 10f;
 
@@ -18,6 +21,8 @@ public class BreathingScript : MonoBehaviour
     public GameObject dummyStick;
 
     public bool controlsEnabled;
+
+
 
     private void Start()
     {
@@ -65,7 +70,7 @@ public class BreathingScript : MonoBehaviour
     {
         if(slider.value <= 0f)
         {
-            print("Drowned");
+            drownedEvent.Invoke();
         }
     }
 

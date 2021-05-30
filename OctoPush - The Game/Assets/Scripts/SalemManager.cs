@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SalemManager : MonoBehaviour
 {
@@ -10,24 +11,32 @@ public class SalemManager : MonoBehaviour
 
     public Timer timer;
     public CountDown countdown;
-
     public GameObject player;
+    public FinishedUIController CompleateUI;
+    public GameObject DrownedUI;
     
     public int numberOfGatesPassed;
     public int maxGates;
 
     private puckGate[] gates;
-
+    private float highScore;
 
     // Start is called before the first frame update
     void Start()
     {
         init();
+
+        getHighScore();
     }
 
 
     void init()
     {
+        player.GetComponent<BreathingScript>().drownedEvent.AddListener(drowned);
+
+        CompleateUI.hide();
+        DrownedUI.active = false;
+
         countdown.CountDownFinished.AddListener(startGame);
         player.GetComponent<BreathingScript>().controlsEnabled = false;
         player.GetComponent<PlayerController>().controlsEnabled = false;
@@ -85,6 +94,43 @@ public class SalemManager : MonoBehaviour
     {
         timer.on = false;
         float finishTime = timer.getCurrentTime();
+
+        // Display finished UI
+        CompleateUI.display();
+        CompleateUI.updateUI(finishTime, getHighScore());
+
+
+        if(finishTime < getHighScore())
+        {
+            setHighScore(finishTime);
+        }
     }
+
    
+    float getHighScore()
+    {
+        float hs = PlayerPrefs.GetFloat("highScore");
+        if (hs > 0f)
+        {
+            return hs;
+        }
+        else
+        {
+            return 999.99f;
+        }
+    }
+
+    void setHighScore(float hs)
+    {
+        PlayerPrefs.SetFloat("highScore", hs);
+    }
+
+
+    public void drowned()
+    {
+        player.GetComponent<BreathingScript>().controlsEnabled = false;
+        player.GetComponent<PlayerController>().controlsEnabled = false;
+        timer.on = false;
+        DrownedUI.active = true;
+    }
 }
