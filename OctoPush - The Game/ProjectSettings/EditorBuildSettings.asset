@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Salem.unity
     guid: e46f82c4f90ee4747a97721143ebcb3f
+  - enabled: 1
+    path: Assets/Scenes/PuckHunt.unity
+    guid: 043371607baa9d544ae2dd909c3fb5a3
   m_configObjects: {}

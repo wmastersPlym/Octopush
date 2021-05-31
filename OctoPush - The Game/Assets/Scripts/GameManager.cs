@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
+
     public void OnStateChange()
     {
         if (gameState == GameState.SALEM)
