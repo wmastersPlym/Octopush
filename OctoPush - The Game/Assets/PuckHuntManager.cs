@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class SalemManager : MonoBehaviour
+public class PuckHuntManager : MonoBehaviour
 {
 
     public Text ui;
@@ -14,11 +14,10 @@ public class SalemManager : MonoBehaviour
     public GameObject player;
     public FinishedUIController CompleateUI;
     public GameObject DrownedUI;
-    
-    public int numberOfGatesPassed;
-    public int maxGates;
 
-    private puckGate[] gates;
+    //public int numberOfPucks;
+
+    public TargetScript target;
     private float highScore;
 
     // Start is called before the first frame update
@@ -32,56 +31,31 @@ public class SalemManager : MonoBehaviour
 
     void init()
     {
+
+        //setHighScore(0);
         player.GetComponent<BreathingScript>().drownedEvent.AddListener(drowned);
 
         CompleateUI.hide();
-        DrownedUI.active = false;
+        DrownedUI.SetActive(false);
 
         countdown.CountDownFinished.AddListener(startGame);
         player.GetComponent<BreathingScript>().controlsEnabled = false;
         player.GetComponent<PlayerController>().controlsEnabled = false;
 
-        GameObject[] gatesgm = GameObject.FindGameObjectsWithTag("PuckGate");
+        target.ChangeInPuckCount.AddListener(updateUI);
+        timer.countDownFinished.AddListener(gameFinished);
 
-        gates = new puckGate[gatesgm.Length];
 
-        for (int i = 0; i < gatesgm.Length; i++) // Fill array of puck gate scripts
-        {
-            gates[i] = gatesgm[i].GetComponent<puckGate>();
-        }
-
-        foreach (puckGate gate in gates)
-        {
-            gate.PuckPassed.AddListener(gatePassed);
-        }
-
-        print("Total puck gates: " + gates.Length);
-        numberOfGatesPassed = 0;
-        maxGates = gates.Length;
+        //print("Total pucks within target: " + target.numberOfPucks);
         updateUI();
     }
 
-    void gatePassed()
+
+    void updateUI()
     {
-        print("Gate Passed");
-        numberOfGatesPassed++;
-        updateUI();
-        checkFinished();
+        ui.text = "Total pucks within target: " + target.numberOfPucks + "";
     }
 
-    void updateUI ()
-    {
-        ui.text = "Gates Passed: " + numberOfGatesPassed.ToString() + "/" + maxGates.ToString();
-    }
-
-    void checkFinished()
-    {
-        if(numberOfGatesPassed >= maxGates)
-        {
-            gameFinished();
-            //print("Finished");
-        }
-    }
 
     void startGame()
     {
@@ -93,36 +67,36 @@ public class SalemManager : MonoBehaviour
     void gameFinished()
     {
         timer.on = false;
-        float finishTime = timer.getCurrentTime();
+        int finishPucks = target.numberOfPucks;
 
         // Display finished UI
         CompleateUI.display();
-        CompleateUI.updateUI(finishTime, getHighScore());
+        CompleateUI.updateUI(finishPucks, getHighScore());
 
 
-        if(finishTime < getHighScore())
+        if (finishPucks > getHighScore())
         {
-            setHighScore(finishTime);
+            setHighScore(finishPucks);
         }
     }
 
-   
-    float getHighScore()
+
+    int getHighScore()
     {
-        float hs = PlayerPrefs.GetFloat("highScoreSalem");
-        if (hs > 0f)
+        int hs = PlayerPrefs.GetInt("highScorePuckHunt");
+        if (hs > 0)
         {
             return hs;
         }
         else
         {
-            return 999.99f;
+            return 0;
         }
     }
 
-    void setHighScore(float hs)
+    void setHighScore(int hs)
     {
-        PlayerPrefs.SetFloat("highScoreSalem", hs);
+        PlayerPrefs.SetInt("highScorePuckHunt", hs);
     }
 
 

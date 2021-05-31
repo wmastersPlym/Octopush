@@ -16,9 +16,7 @@ public class FixToParent : MonoBehaviour
     void Update()
     {
         transform.position = parent.position;
-        //Quaternion targetRotation = parent.rotation;
-        //targetRotation.Set(targetRotation.x, targetRotation.y, targetRotation.z - 90f, targetRotation.w); //+= initRotationZ;
-        //targetRotation.z -= 90;
-        //transform.rotation = targetRotation;
+        
+
     }
 }

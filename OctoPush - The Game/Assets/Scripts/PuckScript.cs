@@ -13,6 +13,10 @@ public class PuckScript : MonoBehaviour
             print("Entered puck gate");
 
             collision.gameObject.GetComponent<puckGate>().puckEntered();
+        } 
+        else if((collision.gameObject.GetComponent<TargetScript>() as TargetScript) != null)
+        {
+            collision.gameObject.GetComponent<TargetScript>().addPuck();
         }
     }
 
@@ -24,6 +28,10 @@ public class PuckScript : MonoBehaviour
             //print("Entered puck gate");
 
             collision.gameObject.GetComponent<puckGate>().puckLeft();
+        }
+        else if ((collision.gameObject.GetComponent<TargetScript>() as TargetScript) != null)
+        {
+            collision.gameObject.GetComponent<TargetScript>().removePuck();
         }
     }
 

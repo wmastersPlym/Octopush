@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -9,7 +10,12 @@ public class Timer : MonoBehaviour
     private float currentTime;
     public bool on;
 
+    public bool countdown;
+    public float countDownTime;
+
     public Text text;
+
+    public UnityEvent countDownFinished = new UnityEvent();
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +34,17 @@ public class Timer : MonoBehaviour
     {
         if(on)
         {
-            currentTime += Time.deltaTime;
-            updateUI();
+            if(!countdown)
+            {
+                currentTime += Time.deltaTime;
+                updateUI();
+            } else
+            {
+                countDownTime -= Time.deltaTime;
+                updateUI();
+                checkFinished();
+            }
+            
         }
     }
 
@@ -42,12 +57,35 @@ public class Timer : MonoBehaviour
     {
         if(text)
         {
-            text.text = (Mathf.Round(currentTime * 100)/100).ToString();
+            if(!countdown)
+            {
+                text.text = (Mathf.Round(currentTime * 100) / 100).ToString();
+            } else
+            {
+                text.text = (Mathf.Round(countDownTime * 100) / 100).ToString();
+            }
+                
         }
     }
 
     public float getCurrentTime()
     {
-        return currentTime;
+        if (!countdown)
+        {
+            return currentTime;
+        }
+        else
+        {
+            return countDownTime;
+        }
+        
+    }
+
+    public void checkFinished()
+    {
+        if(countDownTime <= 0.0f)
+        {
+            countDownFinished.Invoke();
+        }
     }
 }

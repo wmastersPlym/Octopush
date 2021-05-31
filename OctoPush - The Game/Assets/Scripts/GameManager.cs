@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { MAIN_MENU, INFO_PAGE, SALEM }
+public enum GameState { MAIN_MENU, INFO_PAGE, SALEM, PUCKHUNT }
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +39,10 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("InfoPage");
         }
+        else if (gameState == GameState.PUCKHUNT)
+        {
+            SceneManager.LoadScene("PuckHunt");
+        }
     }
 
     public void SetGameState(GameState state)
@@ -55,6 +59,11 @@ public class GameManager : MonoBehaviour
     public void SetStateSalem()
     {
         SetGameState(GameState.SALEM);
+    }
+
+    public void SetStatePuckHunt()
+    {
+        SetGameState(GameState.PUCKHUNT);
     }
 
     public void SetStateInfoPage()

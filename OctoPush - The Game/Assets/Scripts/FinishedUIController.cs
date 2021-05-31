@@ -29,14 +29,14 @@ public class FinishedUIController : MonoBehaviour
 
     public void updateUI(float time, float highScore)
     {
-        timeText.text = "Time: " + time.ToString();
+        timeText.text = "Score: " + time.ToString();
         hsText.text = "HighScore: " + highScore.ToString();
-        if(time < highScore)
-        {
-            newHS.enabled = true;
-        } else
-        {
+        //if(time < highScore)
+        //{
+        //    newHS.enabled = true;
+        //} else
+        //{
             newHS.enabled = false;
-        }
+        //}
     }
 }
