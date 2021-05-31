@@ -2612,8 +2612,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 160, y: 60.1}
+  m_AnchoredPosition: {x: 0, y: -58.2}
+  m_SizeDelta: {x: 160, y: 76.52616}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &665813482
 MonoBehaviour:
@@ -2648,7 +2648,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Weave the puck in between all the cones as quickly as you can
+  m_Text: Get as many pucks on top of the target within the given time as possible
 --- !u!222 &665813483
 CanvasRenderer:
   m_ObjectHideFlags: 0
