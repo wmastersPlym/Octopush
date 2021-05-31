@@ -20,6 +20,9 @@ public class TargetScript : MonoBehaviour
     {
         numberOfPucks++;
         ChangeInPuckCount.Invoke();
+
+        // Plays audio
+        GetComponent<AudioSource>().Play();
     }
 
     public void removePuck()

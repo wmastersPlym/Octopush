@@ -67,6 +67,9 @@ public class SalemManager : MonoBehaviour
         numberOfGatesPassed++;
         updateUI();
         checkFinished();
+
+        // Play sound
+        GetComponent<AudioSource>().Play();
     }
 
     void updateUI ()
