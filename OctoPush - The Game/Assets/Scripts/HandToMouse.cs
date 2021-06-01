@@ -6,19 +6,21 @@ public class HandToMouse : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    float force = 100.0f;
+    public float force = 100.0f;
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //print(targetPos);
         Vector2 pos = new Vector2(transform.position.x, transform.position.y);
         Vector2 dir = targetPos - pos;
+
+        dir = dir.normalized;
         //transform.position = Vector2.MoveTowards(pos, targetPos, force * Time.deltaTime);
         
         //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 180;

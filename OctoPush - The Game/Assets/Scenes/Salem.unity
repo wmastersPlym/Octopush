@@ -3648,6 +3648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dbf2baa916bd04287fd7723e55c839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 500
 --- !u!58 &1121533356
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -5999,9 +6000,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7d9c260c1d7314ca70240a7ab5673b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swimSpeed: 2000
-  sprintSpeed: 4000
-  friction: 0.99
+  swimSpeed: 200
+  sprintSpeed: 400
+  friction: 0.9
   controlsEnabled: 0
   turnSpeed: 50
 --- !u!50 &1897489373
@@ -6239,6 +6240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dbf2baa916bd04287fd7723e55c839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  force: 100
 --- !u!212 &1920402053
 SpriteRenderer:
   m_ObjectHideFlags: 0
